@@ -1,7 +1,7 @@
-node('dind-node') {
+node() {
   withMaven(maven:'M3') {
     stage('Checkout') {
-      git url: 'https://github.com/piomin/sample-spring-microservices-new.git', credentialsId: 'piomin-github', branch: 'master'
+      git url: 'https://github.com/Tass21/sample-spring-microservices-new.git', credentialsId: 'Tass21', branch: 'decelop'
     }
     stage('Build') {
       dir('config-service') {
@@ -13,12 +13,6 @@ node('dind-node') {
       }
     }
     stage('Image') {
-      dir ('config-service') {
-        docker.withRegistry('https://192.168.99.100:5000') {
-          def app = docker.build "piomin/config-service:${env.version}"
-          app.push()
-        }
-      }
     }
   }
 }
